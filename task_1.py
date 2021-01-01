@@ -6,6 +6,7 @@
 месяца и года (например, месяц — от 1 до 12). Проверить работу полученной структуры на
 реальных данных.
 """
+import re
 
 class Data:
     def __init__(self, data_value):
@@ -20,7 +21,11 @@ class Data:
 
     def validate(self):
         if not isinstance(self.data_value, str):
-            print('NOT valid')
+            print('NOT valid type (str)')
+        regex = r"\d{1,2}-\d{1,2}-\d{2,4}"
+        match = re.fullmatch(regex, self.data_value)
+        return True if match else False
 
-dd = Data('1-2-3030')
-print(dd.to_digital())
+
+dd = Data('10-20-3030')
+print(dd.validate())
