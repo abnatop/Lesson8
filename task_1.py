@@ -7,4 +7,20 @@
 реальных данных.
 """
 
-# Git pull add
+class Data:
+    def __init__(self, data_value):
+        self.data_value = data_value
+
+    def to_digital(self):
+        data = self.data_value.split('-')
+        day = int(data[0])
+        month = int(data[1])
+        year = int(data[2])
+        return day, month, year
+
+    def validate(self):
+        if not isinstance(self.data_value, str):
+            print('NOT valid')
+
+dd = Data('1-2-3030')
+print(dd.to_digital())
