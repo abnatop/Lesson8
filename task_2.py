@@ -10,7 +10,7 @@ class Divide:
     def make(value, divider):
         try:
             return (value / divider)
-        except:
+        except ZeroDivisionError:
             return (f'Деление на ноль')
 
 
