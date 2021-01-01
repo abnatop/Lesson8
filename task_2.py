@@ -4,3 +4,15 @@
 качестве делителя программа должна корректно обработать эту ситуацию и не завершиться с
 ошибкой.
 """
+
+class Divide:
+    @staticmethod
+    def make(value, divider):
+        try:
+            return (value / divider)
+        except:
+            return (f'Деление на ноль')
+
+
+print(f'10 / 5 = {Divide.make(10,5)}')
+print(f'10 / 0 = {Divide.make(10,0)}')
