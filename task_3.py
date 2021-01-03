@@ -12,3 +12,41 @@
 не позволить пользователю ввести текст (не число) и отобразить соответствующее
 сообщение. При этом работа скрипта не должна завершаться.
 """
+EXIT = 'stop'
+
+class ListContentError(Exception):
+    @classmethod
+    def value_check(cls, value):
+        try:
+            if not value.isdigit():
+                raise ListContentError(f'Value {value} is not digit')
+        except ListContentError as err:
+            print(err)
+            return True
+
+
+digits = []
+while True:
+    value = input(f'Input digit: ')
+    if value == EXIT:
+        break
+
+    if not ListContentError.value_check(value):
+        digits.append(value)
+
+print(digits)
+
+
+# try:
+#     a = int(a)
+#     if a < 0:
+#         raise ListContentError("You give negative!", a)
+# except ValueError:
+#     print("Error type of value!")
+# except ListContentError as err:
+#     print(f'Message: {err.args[0]}, args: {err.args[1]}')
+# else:
+#     print(f'Positive {a}')
+# finally:
+#     print(f'Finally this is a {a}')
+
