@@ -14,6 +14,7 @@
 """
 EXIT = 'stop'
 
+
 class ListContentError(Exception):
     @classmethod
     def value_check(cls, value):
@@ -35,18 +36,3 @@ while True:
         digits.append(value)
 
 print(digits)
-
-
-# try:
-#     a = int(a)
-#     if a < 0:
-#         raise ListContentError("You give negative!", a)
-# except ValueError:
-#     print("Error type of value!")
-# except ListContentError as err:
-#     print(f'Message: {err.args[0]}, args: {err.args[1]}')
-# else:
-#     print(f'Positive {a}')
-# finally:
-#     print(f'Finally this is a {a}')
-
