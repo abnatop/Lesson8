@@ -10,21 +10,21 @@ from random import choice
 from string import ascii_uppercase, ascii_lowercase, digits
 
 
-def id_generator(size=4):
-    chars = ascii_uppercase + ascii_lowercase + digits
-    return ''.join(choice(chars) for _ in range(size))
-
-
 class Warehouse:
     pass
 
 
 class Equipment(ABC):
+    @staticmethod
+    def id_generator(size=6):
+        chars = ascii_uppercase + ascii_lowercase + digits
+        return ''.join(choice(chars) for _ in range(size))
+
     @abstractmethod
-    def __init__(self, name, price, uniq_id):
+    def __init__(self, name, price):
         self.name = name
         self.price = price
-        self.uniq_id = uniq_id
+        self.uniq_id = Equipment.id_generator()
 
     @abstractmethod
     def __str__(self):
@@ -53,8 +53,8 @@ class Equipment(ABC):
 
 
 class Scanner(Equipment):
-    def __init__(self, name, price, uniq_id, resolution):
-        super().__init__(name, price, uniq_id)
+    def __init__(self, name, price, resolution):
+        super().__init__(name, price)
         self.resolution = resolution
 
     @property
@@ -65,13 +65,13 @@ class Scanner(Equipment):
         self.__resolution = value
 
     def __str__(self):
-        return f'Сканер {self.name}, цена {self.price}, ' \
-               f'кол-во {self.uniq_id}, разрешение {self.resolution}'
+        return f'ID {self.uniq_id} - Сканер {self.name}, ' \
+               f'цена {self.price}, разрешение {self.resolution}'
 
 
 class Printer(Equipment):
-    def __init__(self, name, price, uniq_id, performance):
-        super().__init__(name, price, uniq_id)
+    def __init__(self, name, price, performance):
+        super().__init__(name, price)
         self.performance = performance
 
     @property
@@ -82,12 +82,13 @@ class Printer(Equipment):
         self.__performance = value
 
     def __str__(self):
-        return f'Принтер {self.name}, цена {self.price}, кол-во {self.uniq_id}, стр/мин {self.performance}'
+        return f'ID {self.uniq_id} - Принтер {self.name}, ' \
+               f'цена {self.price}, стр/мин {self.performance}'
 
 
 class Copier(Equipment):
-    def __init__(self, name, price, uniq_id, color=False):
-        super().__init__(name, price, uniq_id)
+    def __init__(self, name, price, color=False):
+        super().__init__(name, price)
         self.color = color
 
     @property
@@ -99,14 +100,14 @@ class Copier(Equipment):
 
     def __str__(self):
         is_color = lambda i: 'YES' if i else 'NO'
-        return f'Копировальный аппарат {self.name}, цена {self.price}, ' \
-               f'кол-во {self.uniq_id}, цветной {is_color(self.color)}'
+        return f'ID {self.uniq_id} - Копировальный аппарат {self.name}, ' \
+               f'цена {self.price}, цветной {is_color(self.color)}'
 
 
 eq = []
-eq.append(Scanner(name='HP-Scan', price=190.0, uniq_id=3, resolution=720))
-eq.append(Printer(name='CANON 12', price=234.0, uniq_id=2, performance=24))
-eq.append(Copier(name='XEROX R5', price=745.0, uniq_id=5, color=False))
+eq.append(Scanner(name='HP-Scan', price=190.0, resolution=720))
+eq.append(Printer(name='CANON 12', price=234.0, performance=24))
+eq.append(Copier(name='XEROX R5', price=745.0, color=False))
 
 for item in eq:
     print(item)
