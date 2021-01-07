@@ -68,6 +68,8 @@ class Equipment(ABC):
 
     @price.setter
     def price(self, value):
+        if not isinstance(value, (int, float)):
+            raise ValueError('Price value type error')
         self.__price = value
 
     @property
